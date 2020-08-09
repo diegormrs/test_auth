@@ -1,0 +1,21 @@
+{% include 'sidebar.html' %}
+<ul>
+{% for perda in object_list %}
+    <li>{{ perda.materia.nome }} - {{ perda.quantidade }}</li>
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+
+    <form action="/perda/criar/" method="get">
+    <input type="submit" name="upvote" value="Criar" />
+    </form>
+
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+</ul>

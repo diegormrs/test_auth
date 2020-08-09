@@ -1,0 +1,24 @@
+
+{% include 'sidebar.html' %}
+<ul>
+{% for compra in object_list %}
+    <li>{{ compra.materia.nome }} - {{ compra.data }} - {{ compra.quantidade }} - {{ compra.valor }} </li>
+
+
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+
+    <form action="/compra/criar/" method="get">
+    <input type="submit" name="upvote" value="Criar" />
+    </form>
+
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+</ul>

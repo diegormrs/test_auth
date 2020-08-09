@@ -1,0 +1,32 @@
+
+{% include 'sidebar.html' %}
+<ul>
+{% for cliente in object_list %}
+    <li>{{ cliente.nome }} - {{ cliente.ativo }}</li>
+
+
+    <form action="/cliente/ativar/{{ cliente.id }}/" method="post"> {% csrf_token %}
+    <input type="submit" name="upvote" value="Activate" />
+    </form>
+
+    <form action="/cliente/editar/{{ cliente.id }}/" method="get"> {% csrf_token %}
+    <input type="submit" name="upvote" value="Edit" />
+    </form>
+
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+
+    <form action="/cliente/criar/" method="get">
+    <input type="submit" name="upvote" value="Criar" />
+    </form>
+
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+</ul>

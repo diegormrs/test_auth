@@ -1,0 +1,31 @@
+{% include 'sidebar.html' %}
+    <form action="/custo/criar/" method="get">
+    <input type="submit" name="upvote" value="Criar" />
+    </form>
+
+
+
+<ul>
+{% for custo in object_list %}
+    <li>{{ custo.nome }} - {{ custo.ativo }} - {{ custo.porcentagem }} - {{ custo.valor }}</li>
+    <a href="javascript:window.location.href = '/custo/ativar/{{ custo.id }}/';">
+
+    <form action="/custo/ativar/{{ custo.id }}/" method="post"> {% csrf_token %}
+    <input type="submit" name="upvote" value="Activate" />
+    </form>
+
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+
+
+
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+</ul>

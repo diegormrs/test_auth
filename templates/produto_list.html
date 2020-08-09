@@ -1,0 +1,42 @@
+{% include 'sidebar.html' %}
+<ul>
+
+    <form action="/produto/criar/" method="get">
+    <input type="submit" name="upvote" value="Criar" />
+    </form>
+
+
+{% for produto in object_list %}
+    <li>{{ produto.nome }} - {{ produto.ativo }} <br>
+    Lucro: {{ produto.lucro }}% <br>
+    Preco Base: {{ produto.precobase }}</li>
+
+
+    <form action="/produto/ativar/{{ produto.id }}/" method="post"> {% csrf_token %}
+    <input type="submit" name="upvote" value="Activate" />
+    </form>
+
+    <form action="/produto/editar/{{ produto.id }}/" method="get"> {% csrf_token %}
+    <input type="submit" name="upvote" value="Edit" />
+    </form>
+
+    <form action="/produto/detalhe/{{ produto.id }}/" method="get">
+    <input type="submit" name="upvote" value="Detalhes" />
+    </form>
+
+
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+
+
+
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+</ul>

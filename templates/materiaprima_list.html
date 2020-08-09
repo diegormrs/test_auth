@@ -1,0 +1,32 @@
+{% include 'sidebar.html' %}
+<ul>
+{% for materiaprima in object_list %}
+    <li>{{ materiaprima.nome }} - {{ materiaprima.ativo }} - {{ materiaprima.tipo_medida }}</li>
+
+
+    <form action="/materiaprima/ativar/{{ materiaprima.id }}/" method="post"> {% csrf_token %}
+    <input type="submit" name="upvote" value="Activate" />
+    </form>
+
+    <form action="/materiaprima/editar/{{ materiaprima.id }}/" method="get"> {% csrf_token %}
+    <input type="submit" name="upvote" value="Edit" />
+    </form>
+
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+
+
+    <form action="/materiaprima/criar/" method="get">
+    <input type="submit" name="upvote" value="Criar" />
+    </form>
+
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+</ul>

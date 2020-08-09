@@ -1,0 +1,27 @@
+{% include 'sidebar.html' %}
+<ul>
+{% for categoria in object_list %}
+    <li>{{ categoria.nome }} - {{ categoria.ativo }}</li>
+    <a href="javascript:window.location.href = '/categoria/ativar/{{ categoria.id }}/';">
+
+    <form action="/categoria/ativar/{{ categoria.id }}/" method="post"> {% csrf_token %}
+    <input type="submit" name="upvote" value="Activate" />
+    </form>
+
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+
+    <form action="/categoria/criar/" method="get">
+    <input type="submit" name="upvote" value="Criar" />
+    </form>
+
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+</ul>

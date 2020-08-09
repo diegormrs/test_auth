@@ -1,0 +1,52 @@
+
+<ul>
+
+    <form action="/canalvenda/" method="get">
+    <input type="submit" name="upvote" value="CanalVenda" />
+    </form>
+
+    <form action="/produto/" method="get">
+    <input type="submit" name="upvote" value="Produto" />
+    </form>
+
+    <form action="/compra/" method="get">
+    <input type="submit" name="upvote" value="Compra" />
+    </form>
+
+    <form action="/perda/" method="get">
+    <input type="submit" name="upvote" value="Perda" />
+    </form>
+
+    <form action="/estoque/" method="get">
+    <input type="submit" name="upvote" value="Estoque" />
+    </form>
+
+    <form action="/categoria/" method="get">
+    <input type="submit" name="upvote" value="Categoria" />
+    </form>
+
+    <form action="/custo/" method="get">
+    <input type="submit" name="upvote" value="Custo" />
+    </form>
+
+    <form action="/materiaprima/" method="get">
+    <input type="submit" name="upvote" value="Materia Prima" />
+    </form>
+
+    <form action="/cliente/" method="get">
+    <input type="submit" name="upvote" value="Cliente" />
+    </form>
+
+    <form action="/pedido/" method="get">
+    <input type="submit" name="upvote" value="Pedido" />
+    </form>
+
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+</ul>

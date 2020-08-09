@@ -1,0 +1,32 @@
+
+{% include 'sidebar.html' %}
+<ul>
+{% for canalvenda in object_list %}
+    <li>{{ canalvenda.nome }} - {{ canalvenda.ativo }} - {{ canalvenda.porcentagem }}</li>
+
+
+    <form action="/canalvenda/ativar/{{ canalvenda.id }}/" method="post"> {% csrf_token %}
+    <input type="submit" name="upvote" value="Activate" />
+    </form>
+
+    <form action="/canalvenda/editar/{{ canalvenda.id }}/" method="get"> {% csrf_token %}
+    <input type="submit" name="upvote" value="Edit" />
+    </form>
+
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+
+    <form action="/canalvenda/criar/" method="get">
+    <input type="submit" name="upvote" value="Criar" />
+    </form>
+
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+</ul>
