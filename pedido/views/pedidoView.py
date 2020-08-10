@@ -76,9 +76,6 @@ class PedidoFinalizarCreate(LoginRequiredMixin, FormView):
         ##kwargs['pedidoid'] = self.kwargs['pk']
         return kwargs
 
-
-
-
 class PedidoView(LoginRequiredMixin, generic.ListView):
 
     model = Pedido

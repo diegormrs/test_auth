@@ -52,5 +52,9 @@ class Pedido(models.Model):
 
         return self.cliente.nome
 
+    def is_completo(self):
+
+        return (self.pedidoclientecompleto and self.pedidoprodutoscompleto and self.pedidocompleto)
+
 ############################################################################################################
 ############################################################################################################
