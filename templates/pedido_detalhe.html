@@ -1,0 +1,27 @@
+
+{% include 'sidebar.html' %}
+
+    <form action="/pedido/criar/" method="get">
+    <input type="submit" name="upvote" value="Criar" />
+    </form>
+<ul>
+
+{{ object.cliente }} <br>
+id: {{ object.id }}<br>
+canal: {{ object.canalvenda }}<br>
+data cria: {{ object.data }}<br>
+entrega: {{ object.dataentrega }}<br>
+desconto: {{ object.desconto }}<br>
+emabalagem: {{ object.embalagem }}<br>
+entrage acusto: {{ object.entrega }}<br>
+valor: {{ object.valor }}<br>
+
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+</ul>

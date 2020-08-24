@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 
 from estoque.views.estoque import CompraCreate, CompraView, EstoqueView, PerdaView, PerdaCreate
 from pedido.views.clienteView import ClienteView, ClienteCreate, ClienteAtivar, ClienteEdit
-from pedido.views.pedidoView import PedidoView, PedidoCreate, PedidoProdutoCreate, PedidoFinalizarCreate
+from pedido.views.pedidoView import PedidoView, PedidoCreate, PedidoProdutoCreate, PedidoFinalizarCreate, PedidoDetalhe
 from produtos.views.categoriaView import CategoriaCreate, CategoriaEdit, CategoriaAtivar, CategoriaView
 from produtos.views.canalvendaView import CanalVendaCreate, CanalVendaView, CanalVendaAtivar, CanalVendaEdit
 from produtos.views.custoView import CustoView, CustoCreate, CustoAtivar, CustoEdit
@@ -72,6 +72,7 @@ urlpatterns = [
     path('pedido/criar/', PedidoCreate.as_view(), name="PEDIDO_CRIAR"),
     re_path('pedido/criar/produto/(?P<pk>\d+)/$', PedidoProdutoCreate.as_view(), name="PEDIDO_CRIAR_PRODUTO"),
     re_path('pedido/criar/finalizar/(?P<pk>\d+)/$', PedidoFinalizarCreate.as_view(), name="PEDIDO_CRIAR_FINALIZAR"),
+    re_path('pedido/detalhe/(?P<pk>\d+)/$', PedidoDetalhe.as_view(), name="PEDIDO_DETALHE"),
     path('pedido/', PedidoView.as_view(), name="PEDIDO"),
 
 

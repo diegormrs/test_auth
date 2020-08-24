@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.generic import DetailView
 from django.views.generic.edit import FormView, UpdateView
 from pedido.form.pedidoclienteForm import PedidoClienteForm
 from pedido.form.pedidofinalizarForm import PedidoFinalizarForm
@@ -88,3 +89,16 @@ class PedidoView(LoginRequiredMixin, generic.ListView):
         #get all the pedidos from the last 30 days
         queryset = Pedido.objects.filter(estabelecimento=self.request.user.profile.estabelecimento)
         return queryset
+
+class PedidoDetalhe(LoginRequiredMixin, DetailView):
+
+    model = Pedido
+    context_object_name = 'Pedido'
+    template_name = 'pedido_detalhe.html'
+
+    def get_object(self, queryset=None):
+
+        #get the details of the order
+        object = Pedido.objects.get(estabelecimento=self.request.user.profile.estabelecimento,
+                                          id=self.kwargs['pk'])
+        return object

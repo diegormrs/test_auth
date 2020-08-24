@@ -13,6 +13,11 @@
     <input type="submit" name="upvote" value="Activate" />
     </form>
 
+    <form action="/pedido/detalhe/{{ pedido.id }}/" method="get"> {% csrf_token %}
+    <input type="submit" name="upvote" value="Detalhes" />
+    </form>
+
+
     <form action="/pedido/editar/{{ pedido.id }}/" method="get"> {% csrf_token %}
     <input type="submit" name="upvote" value="Edit" />
     </form>
