@@ -1,12 +1,10 @@
-from django.db.models.signals import m2m_changed, post_save, pre_save
+from django.db.models.signals import m2m_changed, pre_save
 from django.dispatch import receiver
-
 from pedido.models.pedido import Pedido
 
-#keep the track of the order status, to not allow for example, set a order that is incomplete as delievred
+#keep the track of the order status, to not allow for example, set a order that is incomplete as delievered
 from pedido.models.pedidoproduto import PedidoProduto
 from produtos.models import Preco
-
 
 @receiver(m2m_changed, sender=Pedido.produtos.through)
 def updatepedidostatus(sender, instance, **kwargs):
@@ -32,29 +30,29 @@ def updatevalorpedido(sender, instance, **kwargs):
     if instance.is_completo():
 
         valor_total = 0.0
-        produtos = PedidoProduto.objects.get(pedido=instance)
+        produtos = PedidoProduto.objects.filter(pedido=instance)
         for produto in produtos:
 
             #get the latest price for the product
-            preco = Preco.objects.get(produto=produto,
+            preco = Preco.objects.get(produto=produto.produto,
                                       canalvenda=instance.canalvenda,
                                       datafim=None,
                                       estabelecimento=instance.estabelecimento)
 
-            valor_total = round(valor_total + (preco.preco * produto.quantidade),2)
+            valor_total = round(valor_total + (float(preco.preco) * produto.quantidade),2)
 
         #after get the total value from the products, need to calculate the addition from the order itself
         #the order of the addtions is important. Start with: acrescima/desconto and then embalagem and entrega
 
         if instance.desconto != 0:
-
-            valor_total = valor_total * round((1 + instance.desconto/100),2)
+            #calculating the discount
+            valor_total = valor_total - (valor_total * round((float(instance.desconto)/100),2))
 
         elif instance.acrescimo != 0:
 
-            valor_total = valor_total * round((1 + instance.acrescimo/100),2)
+            valor_total = valor_total * round((1 + float(instance.acrescimo)/100),2)
 
-        valor_total = valor_total + instance.embalagem + instance.entrega
+        valor_total = valor_total + float(instance.embalagem) + float(instance.entrega)
 
         instance.valor = valor_total
 

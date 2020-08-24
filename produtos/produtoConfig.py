@@ -6,4 +6,4 @@ class ProdutosConfig(AppConfig):
     label = 'produtos'
 
     def ready(self):
-        pass
+        import produtos.models.signals

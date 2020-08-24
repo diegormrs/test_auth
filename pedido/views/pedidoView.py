@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, UpdateView
 from pedido.form.pedidoclienteForm import PedidoClienteForm
 from pedido.form.pedidofinalizarForm import PedidoFinalizarForm
 from pedido.form.pedidoprodutoForm import PedidoProdutoForm
@@ -57,11 +57,12 @@ class PedidoProdutoCreate(LoginRequiredMixin, FormView):
         #get order id to keep in the same
         return reverse_lazy('PEDIDO_CRIAR_FINALIZAR', kwargs={'pk': kwargs.pop('pedidoid')})
 
-class PedidoFinalizarCreate(LoginRequiredMixin, FormView):
+class PedidoFinalizarCreate(LoginRequiredMixin, UpdateView):
 
     form_class = PedidoFinalizarForm
     template_name = 'pedido.html'
     success_url = reverse_lazy('PEDIDO')
+    model = Pedido
 
     def form_valid(self, form):
         #add estabelecimento before saving it
@@ -73,7 +74,7 @@ class PedidoFinalizarCreate(LoginRequiredMixin, FormView):
         #necessary to validate unique_together on the form, dur django limitation
         kwargs = super(PedidoFinalizarCreate, self).get_form_kwargs()
         #kwargs['estabelecimentoid'] = self.request.user.profile.estabelecimento.pk
-        ##kwargs['pedidoid'] = self.kwargs['pk']
+        #kwargs['pedidoid'] = self.kwargs['pk']
         return kwargs
 
 class PedidoView(LoginRequiredMixin, generic.ListView):

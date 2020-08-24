@@ -10,11 +10,7 @@ from produtos.models.produtomateria import ProdutoMateriaPrima
 
 @receiver(post_save, sender=Produto.materias.through)
 def updateprodutomaterias(sender, instance, **kwargs):
-    #faz update do produto para nao deixa-lo usavel até que seja completado o cadastro inteiro
-    #caso contrário, as mudancas de materias e custo ainds nao foram recalculadsas no valores
-    #o que pode criar incosistencias no sistema
-
-    #seta materiacompleto
+    #set materiacompleto to true
     instance.produto.materiacompleto = True
     instance.produto.canalcompleto = False
     instance.produto.custocompleto = False
@@ -110,7 +106,7 @@ def updateprodutopreco(sender, instance, **kwargs):
         canaisvenda = instance.canais.all()
         #save one price for each cnanal de venda where the product is sell
         for canal in canaisvenda:
-
+            #create the prie with a lucro and also based on the chanell value added
             precocanal = Preco(preco = round(instance.precolucro() * (1 + canal.porcentagem/100), 2),
                                produto = instance,
                                canalvenda = canal,
@@ -123,5 +119,3 @@ def updateprodutopreco(sender, instance, **kwargs):
     elif instance.materiacompleto and instance.canalcompleto and instance.custocompleto and instance.updatepreco:
 
         instance.precocompleto = True
-
-

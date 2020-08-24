@@ -6,6 +6,12 @@ from pedido.models.pedido import Pedido
 
 class PedidoFinalizarForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        # must use the estabelecimento id in the init, to test the unique_together after on the clean methods
+        #self.estabelecimentoid = kwargs.pop('estabelecimentoid')
+        #self.userid = kwargs.pop('pedidoid')
+
+        super(PedidoFinalizarForm, self).__init__(*args, **kwargs)
 
 ############################################################################################################
 ############################################################################################################
@@ -13,8 +19,6 @@ class PedidoFinalizarForm(forms.ModelForm):
         #need to update the order to complete, then after the signal can calculate the value
         self.instance.pedidocompleto = True
         return super(PedidoFinalizarForm, self).save()
-
-
 
     class Meta:
         model = Pedido

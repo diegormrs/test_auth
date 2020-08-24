@@ -76,6 +76,10 @@ class PedidoProdutoForm(forms.ModelForm):
                                                 quantidade=float(data))
 
             produtopedido.save()
+        pedido = Pedido.objects.get(id=self.pedidoid)
+        #set produtos from pedido to complete
+        pedido.pedidoprodutoscompleto = True
+        pedido.save()
 
     class Meta:
         model = Pedido

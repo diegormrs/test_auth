@@ -1,5 +1,9 @@
 
 {% include 'sidebar.html' %}
+
+    <form action="/pedido/criar/" method="get">
+    <input type="submit" name="upvote" value="Criar" />
+    </form>
 <ul>
 {% for pedido in object_list %}
     <li>{{ pedido.cliente }} - {{ pedido.id }}</li>
@@ -17,9 +21,7 @@
     <li>No articles yet.</li>
 {% endfor %}
 
-    <form action="/pedido/criar/" method="get">
-    <input type="submit" name="upvote" value="Criar" />
-    </form>
+
 
     {% if messages %}
 <ul class="messages">
