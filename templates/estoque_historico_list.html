@@ -1,0 +1,28 @@
+
+{% include 'sidebar.html' %}
+<ul>
+{% for estoque in object_list %}
+    <li>{{ estoque.materia.nome }} - <br>
+        QTD antes: {{ estoque.quantidadeantes }} <br>
+        Valor antes: {{ estoque.valorantes }} <br>
+        Valor Unitário antes {{ estoque.valorunitarioantes }} <br>
+        QTS depois: {{ estoque.quantidadedepois }}</li>
+        Valor depois {{ estoque.valordepois }} <br>
+        Valor unitario depois {{ estoque.valorunitariodepois }} <br>
+    <form action="/estoque/historico/{{ estoque.materia.id }}/" method="get">
+    <input type="submit" name="upvote" value="Historico" />
+
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+
+
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+</ul>

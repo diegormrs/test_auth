@@ -41,4 +41,4 @@ class EstoqueHistorico(models.Model):
 
     def __str__(self):
 
-        return str(self.materia.nome + " | " + str(self.quantidade))
+        return str(self.materia.nome + " | " + str(self.quantidadeantes))

@@ -6,15 +6,13 @@
         QTD: {{ estoque.quantidade }} <br>
         Valor Total: {{ estoque.valor }} <br>
         Valor Unitario: {{ estoque.valorunitario }}</li>
-
+    <form action="/estoque/historico/{{ estoque.materia.id }}/" method="get"> {% csrf_token %}
+    <input type="submit" name="upvote" value="Activate" />
 
 {% empty %}
     <li>No articles yet.</li>
 {% endfor %}
 
-    <form action="/canalvenda/criar/" method="get">
-    <input type="submit" name="upvote" value="Criar" />
-    </form>
 
     {% if messages %}
 <ul class="messages">

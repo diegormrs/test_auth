@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, FormView, UpdateView
 from estoque.form.compraForm import CompraForm
 from estoque.form.perdaForm import PerdaForm
@@ -8,8 +9,8 @@ from django.http import HttpResponseRedirect
 from django.views import generic, View
 
 from estoque.models.estoque import Estoque
+from estoque.models.estoquehistorico import EstoqueHistorico
 from estoque.models.perda import Perda
-
 
 class CompraCreate(LoginRequiredMixin, FormView):
 
@@ -97,4 +98,20 @@ class PerdaView(LoginRequiredMixin, generic.ListView):
 
         #carrega todas as materia-rimas do estabelecimento
         queryset = Perda.objects.filter(estabelecimento=self.request.user.profile.estabelecimento)
+        return queryset
+
+############################################################################################################
+############################################################################################################
+
+class EstoqueHistoricoView(LoginRequiredMixin, generic.ListView):
+
+    model = EstoqueHistorico
+    context_object_name = 'Estoque Histórico'
+    template_name = 'estoque_historico_list.html'
+
+    def get_queryset(self):
+
+        #carrega todas as materia-rimas do estabelecimento
+        queryset = EstoqueHistorico.objects.filter(estabelecimento=self.request.user.profile.estabelecimento,
+                                                   materia=self.kwargs['pk'])
         return queryset

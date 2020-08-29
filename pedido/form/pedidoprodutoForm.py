@@ -16,8 +16,14 @@ class PedidoProdutoForm(forms.ModelForm):
         super(PedidoProdutoForm, self).__init__(*args, **kwargs)
 
         #get all the products avaible to be used in the order
+        #Only active and complete products
 
-        fields = Produto.objects.filter(estabelecimento=self.estabelecimentoid, ativo=True)
+        fields = Produto.objects.filter(estabelecimento=self.estabelecimentoid,
+                                        ativo=True,
+                                        materiacompleto = True,
+                                        canalcompleto = True,
+                                        custocompleto = True,
+                                        precocompleto = True)
 
         #create a field for each product, so the amount can be entered
         #also, uses the id at the end, to be used as refrence on the save method

@@ -6,8 +6,7 @@ from estoque.models.estoque import Estoque
 from estoque.models.estoquehistorico import EstoqueHistorico
 from estoque.models.perda import Perda
 from produtos.models.produto import Produto
-
-
+from produtos.models.produtomateria import ProdutoMateriaPrima
 
 @receiver(post_save, sender=Compra)
 def updatecompra(sender, instance, **kwargs):
@@ -52,6 +51,13 @@ def updatecompra(sender, instance, **kwargs):
                                             estabelecimento=instance.estabelecimento)
         estoquehistorico.save()
         estoque.save()
+    #set all the products related to this material taht the price needs to be updated
+    produtos = ProdutoMateriaPrima.objects.filter(materiaprima=instance.materia)
+
+    for materia in produtos:
+        materia.produto.changed = True
+        materia.produto.updatepreco =True
+        materia.produto.save()
 
 ############################################################################################################
 ############################################################################################################
@@ -84,3 +90,10 @@ def updateperda(sender, instance, **kwargs):
     estoquehistorico.save()
 
     estoque.save()
+    # set all the products related to this material taht the price needs to be updated
+    produtos = ProdutoMateriaPrima.objects.filter(materiaprima=instance)
+
+    for materia in produtos:
+        materia.produto.changed = True
+        materia.produto.updatepreco =True
+        materia.produto.save()

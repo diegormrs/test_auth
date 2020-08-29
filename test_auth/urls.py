@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 
-from estoque.views.estoque import CompraCreate, CompraView, EstoqueView, PerdaView, PerdaCreate
+from estoque.views.estoque import CompraCreate, CompraView, EstoqueView, PerdaView, PerdaCreate, EstoqueHistoricoView
 from pedido.views.clienteView import ClienteView, ClienteCreate, ClienteAtivar, ClienteEdit
 from pedido.views.pedidoView import PedidoView, PedidoCreate, PedidoProdutoCreate, PedidoFinalizarCreate, PedidoDetalhe
 from produtos.views.categoriaView import CategoriaCreate, CategoriaEdit, CategoriaAtivar, CategoriaView
@@ -61,6 +61,7 @@ urlpatterns = [
     path('compra/', CompraView.as_view(), name="COMPRA"),
     path('perda/', PerdaView.as_view(), name="PERDA"),
     path('estoque/', EstoqueView.as_view(), name="ESTOQUE"),
+    re_path('estoque/historico/(?P<pk>\d+)/$', EstoqueHistoricoView.as_view(), name="ESTOQUE_HISTORICO"),
 
     #####CLIENTES######
     path('cliente/criar/', ClienteCreate.as_view(), name="CLIENTE_CRIAR"),
