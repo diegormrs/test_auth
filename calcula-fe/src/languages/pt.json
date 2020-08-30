@@ -1,0 +1,46 @@
+{
+    "home": {
+        "title": "CalculaCusto"
+    },
+    "products": {
+        "title": "Produtos",
+        "name": "Nome",
+        "price": "Preço",
+        "actions": "Ações",
+        "add": {
+            "title":"Adicionar Produto",
+            "placeholder": {
+                "name":"Insira o nome do produto",
+                "price":"Insira o preço do produto"  
+            }, 
+            "message":{
+                "name":"Por favor insira o nome do produto",
+                "price":"Por favor insira o preço do produto"    
+            }
+        }
+    },
+    "category": {
+        "title": "Categorias",
+        "name": "Nome",
+        "actions": "Ações",
+        "add": {
+            "title":"Adicionar Categoria",
+            "placeholder": {
+                "name":"Insira o nome da categoria"
+            }, 
+            "message":{
+                "name":"Por favor insira um nome para a categoria"
+            }
+        }
+    },
+    "stock": {
+        "title": "Estoque",
+        "name": "Nome",
+        "price": "Preço",
+        "actions": "Ações"
+    },
+    "button": {
+        "save": "Salvar",
+        "back": "Voltar"
+    }
+}
