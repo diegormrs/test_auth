@@ -1,0 +1,33 @@
+{
+  "users": [
+    {
+      "username": "we",
+      "email": "hs@saol.cm",
+      "gender": "others",
+      "hobbies": [
+        "Coding",
+        "Singing"
+      ],
+      "review": 13,
+      "id": 1
+    }
+  ],
+  "category": [
+    {
+      "categoryname": "SSS",
+      "id": 1
+    },
+    {
+      "categoryname": "sss",
+      "id": 2
+    },
+    {
+      "categoryname": "bibib",
+      "id": 3
+    },
+    {
+      "categoryname": "Bibi",
+      "id": 4
+    }
+  ]
+}
