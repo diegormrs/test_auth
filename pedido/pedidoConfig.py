@@ -6,4 +6,4 @@ class PedidoConfig(AppConfig):
     label = 'pedido'
 
     def ready(self):
-        import pedido.models.signals
+        import pedido.models
