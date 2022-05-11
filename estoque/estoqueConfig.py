@@ -7,4 +7,4 @@ class EstoqueConfig(AppConfig):
 
     def ready(self):
 
-        import estoque.models.signals
+        pass
